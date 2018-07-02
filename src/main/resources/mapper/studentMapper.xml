@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zf.demo4jsp.mapper.StudentMapper" >
+    <resultMap id="BaseResultMap" type="com.zf.demo4jsp.entity.Student" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="student_id" property="studentId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="age" property="age" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="DATE" />
+    </resultMap>
+    <!-- 开启基于redis的二级缓存 -->
+    <cache type="com.zf.demo4jsp.util.RedisCache"/>
+
+    <sql id="Base_Column_List" >
+        id, student_id, name, age, sex,birthday
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap"  >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM student
+    </select>
+
+
+
+</mapper>
